@@ -69,5 +69,48 @@ pub fn understand_ownership() {
 
     let unsized_data = String::from("ScriptSaga");
     let get_ownership = unsized_data; // This is unsized data, and then the ownership is transferred to a new variable, and unsized data is not valid anymore
-    
+}
+
+// Understanding Rust Borrow Rules in Simpler Words
+
+/*
+    In simpler terms, borrowing in Rust simply means getting a reference to a variable.
+    There are some borrow rules defined in Rust, but before that, just remember one
+    thing very carefully:
+
+    "The scope of a variable is defined from the line where the variable is first declared
+    until it is no longer used. If it is not used, the scope is defined until the end. Also, the scope
+    remains within a { } block, and if any value or variable is used inside a { },
+    like
+    {
+        <some_variable_or_value> this value is always returned from the scope
+    }
+    "
+
+    There are some borrow rules that the Rust borrow checker uses to prevent race conditions,
+    as follows:
+
+    1. At any given time, you can have either one mutable reference or any number of immutable references.
+    2. References must always be valid.
+*/
+
+pub fn understand_borrow_rules() {
+    // Why do we borrow? -> We borrow when we don't want to transfer ownership.
+    let mut arg1: String = String::from("follow_script_saga");
+
+    // Multiple immutable borrows are allowed, which simply means you want to read the data.
+    let immutable_borrow_arg1_first = &arg1;
+    let immutable_borrow_arg1_second = &arg1;
+
+    // Uncommenting the line below will give an error because the variable is borrowed
+    // both mutably and immutably in the same scope of immutable_borrow_arg1_first.
+    // let mutable_borrow_arg1 = &mut arg1;
+
+    println!("{}", immutable_borrow_arg1_first);
+
+    // Mutable borrowing is valid here because immutable_borrow_arg1_first is not in scope now.
+    let mutable_borrow_arg1 = &mut arg1;
+
+    // A borrowed reference can be given to a function as an argument or can be returned from a function,
+    // but it requires an understanding of lifetimes, which is beyond the scope of this example.
 }

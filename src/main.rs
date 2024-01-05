@@ -19,8 +19,12 @@ pub fn script_saga_function_one(_arg1: u32, _arg2: &String, _arg3: bool) -> (u32
 
 fn main() {
     // tut2::function_return_a_result();
-    tut3::variable_in_rust()
+    // tut3::variable_in_rust()
+    tut3::understand_borrow_rules();
 
     // let arg2 = String::from("Shashank");
     // script_saga_function_one(1, &arg2, true);
 }
+
+
+
