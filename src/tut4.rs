@@ -80,3 +80,33 @@ pub fn script_saga() {
 pub fn execute_life_time<'a>(arg1: &'a str, arg2: &'a str) -> &'a str {
     arg1
 }
+
+// Lifetimes in struct
+
+// Here you need to specify a lifetime
+// pub struct WrongScriptSagaFollower {
+//    first_name: &str,
+//    last_name: &str
+// }
+pub struct ScriptSagaFollower<'a> {
+    first_name: &'a str,
+    last_name: String,
+}
+
+impl<'a> ScriptSagaFollower<'a> {
+    pub fn method_with_self(self, arg1: i32, arg2: bool) {
+        // Here you don't need to specify the lifetime because it follows elision third rule.
+        // So the function will have this representation method_with_self<'a>(self, arg1: 'a i32, arg2: 'a bool)
+    }
+
+    pub fn method_with_self_return_ref<'b>(self, arg1: &'b str) -> &'a str {
+        self.first_name
+    }
+
+    // This is wrong; here you need to specify the lifetime of the return type, which should be the same as 'a.
+    // pub fn method_with_self_wrong_return_ref<'b>(self, arg1: &'b str) -> &str {
+    //     self.first_name
+    // }
+
+    // Rest everything remains the same for associated functions that do not have a self reference.
+}
