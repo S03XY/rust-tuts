@@ -1,6 +1,7 @@
 mod tut2;
 mod tut3;
 mod tut4;
+mod  tut5;
 
 // how do we define a function in rust ?
 // fn <function_name>(arg1:type,arg2:type,arg3:type...) -> type {
