@@ -40,3 +40,35 @@ pub fn implementing_rust_struct() {
     println!("User mobile number: {}", user.mobile_number);
     println!("User country code: {}", user.country_code);
 }
+
+// Understanding Enums in Rust
+
+// Enums in Rust are basic and simple, accessed via the :: notation.
+// "derive" is a procedural macro, which we will discuss in some other snippet. For now, understand that
+// it is required to implement the Debug trait to log enums and structs.
+// Enums are primarily used in pattern matching.
+#[derive(Debug)]
+pub enum ScriptSagaEnum {
+    SimpleVariant,
+    PointStructVariant(i32, i32, i32),
+    StructVariant {
+        first_name: String,
+        last_name: String,
+    },
+    SingleArgs(String),
+}
+
+pub fn understanding_rust_enums() {
+    let my_enum_simple_variant = ScriptSagaEnum::SimpleVariant;
+    let my_enum_point_variant = ScriptSagaEnum::PointStructVariant(32, 32, 32);
+    let my_enum_struct_variant = ScriptSagaEnum::StructVariant {
+        first_name: "script".to_string(),
+        last_name: "saga".to_string(),
+    };
+    let my_enum_single_args = ScriptSagaEnum::SingleArgs("".to_string());
+
+    println!(
+        "{:?} {:?} {:?} {:?}",
+        my_enum_simple_variant, my_enum_point_variant, my_enum_struct_variant, my_enum_single_args
+    );
+}
