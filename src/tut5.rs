@@ -39,6 +39,13 @@ pub fn implementing_rust_struct() {
     println!("User last name: {}", user.last_name);
     println!("User mobile number: {}", user.mobile_number);
     println!("User country code: {}", user.country_code);
+
+    // create struct from other structs
+
+    let user_2: ScriptSagaFollower = ScriptSagaFollower {
+        first_name: "".to_string(),
+        ..user
+    };
 }
 
 // Understanding Enums in Rust

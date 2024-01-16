@@ -92,7 +92,28 @@ pub fn something_that_returns_result_type(some_condition: bool) -> Result<i32, E
     Ok(1)
 }
 
-// rust destructuring and pattern matching
+// Rust destructuring and pattern matching
+
+/*
+    Before understanding advanced pattern matching, you need to understand REFUTABILITY AND IRREFUTABILITY.
+
+    While pattern matching, you need to take care of the type of values an expression can possibly have.
+    Patterns in which the pattern can take all possible values of an expression are known as irrefutable patterns,
+    whereas patterns that don't care about all the possible values of an expression are known as refutable patterns.
+
+    An example of an irrefutable pattern is let a = 5;
+    Remember that function parameters, for loops, and let statements take only irrefutable patterns.
+
+    An example of a refutable pattern is when you use if let or while let syntax:
+
+    if let Some(value) = option_args {
+        // Execute some code.
+    }
+
+    while let Some(value) = vec_args.pop() {
+        // Execute some code; this code is going to execute until the value is not None.
+    }
+*/
 
 pub struct Point(i32, i32, i32);
 pub struct Coordinate {
@@ -102,43 +123,55 @@ pub struct Coordinate {
 }
 
 pub fn understanding_rust_destructuring_with_pattern_matching() {
-    // you can define multiple variable in none line using pattern matching
     let arr_1: [i32; 2] = [1, 2];
+    // You can define multiple variables in one line using pattern matching.
     let (a, mut b, c) = (1, 2, arr_1);
-    // you cannot destructure and array or vector with pattern matching but tuple can be
-    // let (a,b) = arr_1;  this is wrong
+
+    // You cannot destructure an array as shown above.
+    // let (a,b) = arr_1;  This is incorrect.
+    // but instead you can use range operator
+    let [a, ..] = arr_1; // but this is correct
 
     let origin = Point(0, 0, 0);
-    let Point(x, y, z) = origin; // remember to use parantheses not curly brackets
-                                 // while destructuring tuple struct
+    let Point(x, y, z) = origin; // Remember to use parentheses, not curly brackets,
+                                 // while destructuring tuple structs.
 
-    // for key value struct use curly brackets
+    // For key-value structs, use curly brackets.
     let coordinate_one = Coordinate { x: 0, y: 0, z: 0 };
     let Coordinate { x, y, z } = coordinate_one;
 
-    // using with match expressions
+    // You need to specify all the fields while destructuring or use _ or .. syntax.
+    // Use .. syntax for struct named identifiers {Key Value Struct} and use _ for unnamed identifiers (Point Struct),
+    // else the compiler will complain.
+    // let Coordinate {x} = coordinate_one; This is wrong.
 
+    let a = vec![1, 2, 3, 4];
+
+    let Point(x, _, _) = origin; // You can use Point(x,..) syntax, but don't use it for uniformity in learning.
+                                 // In general, you can use .. for any range-based type like struct, array, vec, etc.,
+                                 // which don't have any named identifiers in them.
+
+    let Coordinate { x, .. } = coordinate_one; // But here you cannot use Coordinate{x,_,_} because it uses named identifiers.
+
+    // Destructuring and pattern matching
     match origin {
         Point(x, _, _) => {
-            // excute code related to x coordinate
+            // This type of syntax means that you are taking care of the patterns, but you only need
+            // the x value out of it, and the rest of the arms will become unreachable or dead code.
         }
+
         Point(x, y, _) => {
-            // execute code related to x and y cordinate
-        }
-        Point(x, y, z) => {
-            // execute code related to x,y and z coordinate
-        }
-        _ => {
-            // NOTE: THIS IS UREACHABLE CODE YOU DONT NEED TO USE IT BECAUSE ALL THE ARMS ARE ALREADY SATISFYING
-            // ALL THE POSSIBLE CODITION origin CAN TAKE
+            // This is unreachable code.
         }
     }
 
-    // usign match guards
-
-    // match coordinate_one {
-    //     Coordinate { x } => {}
-    //     Coordinate { x, y, .. } => {}
-    //     Coordinate { x, y, z } => {}
-    // }
+    // The same thing is true for the .. (range operator), i.e.,
+    match origin {
+        Point(x, ..) => {
+            // Same as Point(x,_,_) as shown above.
+        }
+        Point(x, y, ..) => {
+            // This is unreachable code.
+        }
+    }
 }
