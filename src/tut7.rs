@@ -1,6 +1,6 @@
 // understanding pattern matching
 
-use std::fmt::Error;
+use std::{array, fmt::Error, vec};
 
 // A VERY IMPORTANT THING IN RUST
 pub fn understanding_pattern_matching() {
@@ -70,6 +70,18 @@ pub fn understanding_pattern_matching() {
         (0, true) => (0, 1), // You can omit {} if the code block is of 1 line only.
         (_, _) => (0, 1),
     };
+
+    // Match using if let syntax
+    // The if let syntax in match is used when you are concerned about a specific case
+    // and don't care about other cases
+
+    let value = Some(5);
+    // I am only interested in the OK value, so I can use something like this
+
+    if let Some(val) = value {
+        // Execute some code using val
+        println!("{}", val);
+    }
 }
 
 pub fn something_that_returns_result_type(some_condition: bool) -> Result<i32, Error> {
@@ -78,4 +90,55 @@ pub fn something_that_returns_result_type(some_condition: bool) -> Result<i32, E
         // return Err(0);
     }
     Ok(1)
+}
+
+// rust destructuring and pattern matching
+
+pub struct Point(i32, i32, i32);
+pub struct Coordinate {
+    x: i32,
+    y: i32,
+    z: i32,
+}
+
+pub fn understanding_rust_destructuring_with_pattern_matching() {
+    // you can define multiple variable in none line using pattern matching
+    let arr_1: [i32; 2] = [1, 2];
+    let (a, mut b, c) = (1, 2, arr_1);
+    // you cannot destructure and array or vector with pattern matching but tuple can be
+    // let (a,b) = arr_1;  this is wrong
+
+    let origin = Point(0, 0, 0);
+    let Point(x, y, z) = origin; // remember to use parantheses not curly brackets
+                                 // while destructuring tuple struct
+
+    // for key value struct use curly brackets
+    let coordinate_one = Coordinate { x: 0, y: 0, z: 0 };
+    let Coordinate { x, y, z } = coordinate_one;
+
+    // using with match expressions
+
+    match origin {
+        Point(x, _, _) => {
+            // excute code related to x coordinate
+        }
+        Point(x, y, _) => {
+            // execute code related to x and y cordinate
+        }
+        Point(x, y, z) => {
+            // execute code related to x,y and z coordinate
+        }
+        _ => {
+            // NOTE: THIS IS UREACHABLE CODE YOU DONT NEED TO USE IT BECAUSE ALL THE ARMS ARE ALREADY SATISFYING
+            // ALL THE POSSIBLE CODITION origin CAN TAKE
+        }
+    }
+
+    // usign match guards
+
+    // match coordinate_one {
+    //     Coordinate { x } => {}
+    //     Coordinate { x, y, .. } => {}
+    //     Coordinate { x, y, z } => {}
+    // }
 }
