@@ -3,6 +3,7 @@ mod tut3;
 mod tut4;
 mod  tut5;
 mod tut6;
+mod tut7;
 
 // how do we define a function in rust ?
 // fn <function_name>(arg1:type,arg2:type,arg3:type...) -> type {
@@ -24,7 +25,7 @@ fn main() {
     // tut2::function_return_a_result();
     // tut3::variable_in_rust()
     // tut3::understand_borrow_rules();
-    tut6::understanding_loops();
+    // tut6::understanding_loops();
 
     // let arg2 = String::from("Shashank");
     // script_saga_function_one(1, &arg2, true);
