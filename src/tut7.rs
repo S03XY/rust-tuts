@@ -92,8 +92,6 @@ pub fn something_that_returns_result_type(some_condition: bool) -> Result<i32, E
     Ok(1)
 }
 
-// Rust destructuring and pattern matching
-
 /*
     Before understanding advanced pattern matching, you need to understand REFUTABILITY AND IRREFUTABILITY.
 
@@ -115,6 +113,8 @@ pub fn something_that_returns_result_type(some_condition: bool) -> Result<i32, E
     }
 */
 
+// Rust destructuring and pattern matching
+
 pub struct Point(i32, i32, i32);
 pub struct Coordinate {
     x: i32,
@@ -128,9 +128,9 @@ pub fn understanding_rust_destructuring_with_pattern_matching() {
     let (a, mut b, c) = (1, 2, arr_1);
 
     // You cannot destructure an array as shown above.
-    // let (a,b) = arr_1;  This is incorrect.
-    // but instead you can use range operator
-    let [a, ..] = arr_1; // but this is correct
+    // let (a, b) = arr_1;  // This is incorrect.
+    // Instead, you can use the range operator.
+    let [a, ..] = arr_1; // This is correct.
 
     let origin = Point(0, 0, 0);
     let Point(x, y, z) = origin; // Remember to use parentheses, not curly brackets,
@@ -147,11 +147,11 @@ pub fn understanding_rust_destructuring_with_pattern_matching() {
 
     let a = vec![1, 2, 3, 4];
 
-    let Point(x, _, _) = origin; // You can use Point(x,..) syntax, but don't use it for uniformity in learning.
+    let Point(x, _, _) = origin; // You can use Point(x, ..) syntax, but don't use it for uniformity in learning.
                                  // In general, you can use .. for any range-based type like struct, array, vec, etc.,
                                  // which don't have any named identifiers in them.
 
-    let Coordinate { x, .. } = coordinate_one; // But here you cannot use Coordinate{x,_,_} because it uses named identifiers.
+    let Coordinate { x, .. } = coordinate_one; // But here you cannot use Coordinate { x, _, _ } because it uses named identifiers.
 
     // Destructuring and pattern matching
     match origin {
@@ -168,7 +168,7 @@ pub fn understanding_rust_destructuring_with_pattern_matching() {
     // The same thing is true for the .. (range operator), i.e.,
     match origin {
         Point(x, ..) => {
-            // Same as Point(x,_,_) as shown above.
+            // Same as Point(x, _, _) as shown above.
         }
         Point(x, y, ..) => {
             // This is unreachable code.
