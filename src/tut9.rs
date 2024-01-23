@@ -86,6 +86,44 @@ pub fn understanding_rust_vec() {
     println!("{}", vec_one[0]);
     let value_at_zero_index = vec_one.get(0); // Returns an Option type
 
+    // Getting the length of the vector
+    println!("Length: {}", vec_one.len());
+
+    // Iterating over the array elements by converting the vector into a slice
+    for element in vec_one.as_slice() {
+        // Iterating over elements using a slice
+    }
+
+    // Iterating over the array using indexing
+    for index in 0..vec_one.len() {
+        // Iterating over an array using indexing
+    }
+
+    // Iterating over the vector using the iterator
+    for element in vec_one.iter() {
+        // 'element' is a reference and will be automatically dereferenced into i32 because of deref coercion
+    }
+
+    // Get the iterator for a vector
+    let mut vec_two_iter = vec_two.into_iter();
+    vec_two_iter.next();
+
+    // Additional Vec useful functions
+
+    vec_one.capacity(); // The number of elements an array can store without reallocating
+    vec_one.reverse();
+    vec_one.sort();
+    vec_one.insert(0, 1);
+    let does_contain = 1;
+    vec_one.contains(&does_contain);
+    let array_sliced = &vec_one[..];
+
+    let new_slice = [1, 2];
+    vec_one.copy_from_slice(&new_slice); // It will copy elements from another slice
+    vec_one.clone_from_slice(&new_slice); // Clone elements from another slice
+
+    // There are other functions that you can explore
+
     // Popping the last value
     vec_one.pop(); // Gives you an Option type
 
