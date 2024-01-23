@@ -3,7 +3,7 @@
 pub fn understanding_advanced_pattern_matching() {
 
     let number = 0;
-    
+
     // Remember, match expressions are exhaustive and require the sll the conditions that the value can take to be specified.
     // Range/or based conditioning match arms
     // In range-based arms, the end is inclusive in <start>..<end>
@@ -26,6 +26,8 @@ pub fn understanding_advanced_pattern_matching() {
         }
     }
 
+
+    let number = 0;
     // Match expression with match guards
     match number {
         n if n >= 1 && n <= 10 && n % 2 == 0 => {
