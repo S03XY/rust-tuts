@@ -133,5 +133,3 @@ pub fn understanding_rust_vec() {
     // You can also use it in an if statement
     if let Some(value) = vec_one.pop() {}
 }
-
-// Result enum and option enum
