@@ -66,3 +66,37 @@ pub fn understanding_hash_map() {
     // Cleans the map but keeps the allocated memory for reuse.
     map.clear();
 }
+
+// Understanding Rust Strings
+
+pub fn understanding_rust_strings() {
+    // There are two types of strings in Rust:
+    // - Static strings that are stored in the program binary.
+    // - Dynamic strings that are stored in heap memory.
+    // When I say static string, I mean a type of string whose size is known at compile time,
+    // and when I say dynamic string, I mean a type of string whose size is unknown at compile time.
+
+    let static_str: &str = "script_saga"; // Static strings are always of reference type because they are a slice of elements that are stored
+                                          // in the program binary.
+
+    let dynamic_str = String::new(); // Dynamic string.
+
+    // There are multiple ways of creating a dynamic string.
+    let dynamic_str = "script_saga".to_string();
+    let dynamic_str = String::from("script_saga");
+    let dynamic_str = String::new();
+
+    // Converting a String to &str type.
+    let str_type = &dynamic_str[..]; // Slicing.
+
+    check_deref_coercion(&dynamic_str); // Here you can see the function input is of &str type, but you can give String type
+                                        // because String type implements a deref trait and specifies what to do when a type is referenced,
+                                        // and as a String implements a deref trait, it converts to &str automatically.
+
+    // Deref trait is a special type of trait that tells the Rust compiler what to do when a type is referenced because in Rust,
+    // dereferencing happens automatically.
+
+    println!("{:?}", str_type);
+}
+
+pub fn check_deref_coercion(arg_one: &str) {}

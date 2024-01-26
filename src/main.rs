@@ -32,7 +32,8 @@ fn main() {
     // tut8::understanding_advanced_pattern_matching();
     // tut9::understanding_rust_inheritance();
     // tut9::understanding_rust_vec();
-    tut10::understanding_hash_map();
+    // tut10::understanding_hash_map();
+    tut10::understanding_rust_strings();
 
     // let arg2 = String::from("Shashank");
     // script_saga_function_one(1, &arg2, true);
